@@ -19,9 +19,10 @@ class PostController implements Controller {
         this.router.post(
             `${this.path}create-task`,
             validationMiddleware(validate.create),
+            authenticated,
             this.create
         );
-        this.router.get(`${this.path}list-task`, authenticated, this.getProduct);
+        this.router.get(`${this.path}list-tasks`, authenticated, this.getProduct);
     }
 
     private create = async (

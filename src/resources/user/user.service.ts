@@ -1,5 +1,7 @@
 import UserModel from '@/resources/user/user.model';
+import User from './user.interface';
 import token from '@/utils/token';
+
 
 class UserService {
     private user = UserModel;
@@ -11,19 +13,17 @@ class UserService {
         name: string,
         email: string,
         password: string,
-        role: string
-    ): Promise<string | Error> {
+    ): Promise<User | Error> {
         try {
             const user = await this.user.create({
                 name,
                 email,
                 password,
-                role,
             });
 
-            const accessToken = token.createToken(user);
+            // const accessToken = token.createToken(user);
 
-            return accessToken;
+            return user;
         } catch (error) {
             throw new Error(error.message);
         }
@@ -39,11 +39,13 @@ class UserService {
         try {
             const user = await this.user.findOne({ email });
 
+
             if (!user) {
                 throw new Error('Unable to find user with that email address');
             }
 
             if (await user.isValidPassword(password)) {
+            
                 return token.createToken(user);
             } else {
                 throw new Error('Wrong credentials given');

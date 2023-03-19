@@ -6,6 +6,7 @@ import validate from '@/resources/user/user.validation';
 import UserService from '@/resources/user/user.service';
 import authenticated from '@/middleware/authenticated.middleware';
 
+
 class UserController implements Controller {
     public path = '/';
     public router = Router();
@@ -40,8 +41,7 @@ class UserController implements Controller {
             const token = await this.UserService.register(
                 name,
                 email,
-                password,
-                'user'
+                password
             );
 
             res.status(201).json({ token });
@@ -59,6 +59,7 @@ class UserController implements Controller {
             const { email, password } = req.body;
 
             const token = await this.UserService.login(email, password);
+
 
             res.status(200).json({ token });
         } catch (error) {

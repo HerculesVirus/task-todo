@@ -9,9 +9,9 @@ class PostService {
      */
     public async create(title: string, body: string): Promise<Product> {
         try {
-            const post = await this.task.create({ title, body });
+            const task = await this.task.create({ title });
 
-            return post;
+            return task;
         } catch (error) {
             throw new Error('Unable to create task');
         }

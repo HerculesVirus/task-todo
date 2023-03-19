@@ -44,7 +44,8 @@ class App {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
 
         mongoose.connect(
-            `mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
+            `mongodb://127.0.0.1:27017/myapp`
+            // `mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
         );
     }
 
